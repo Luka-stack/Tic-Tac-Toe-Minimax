@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/takacchi/CLionProjects/TicTacToe/gamesys.cpp
+
+/home/takacchi/CLionProjects/TicTacToe/main.c
+stdio.h
+-
+unistd.h
+-
+minimax.cpp
+/home/takacchi/CLionProjects/TicTacToe/minimax.cpp
+gamesys.cpp
+/home/takacchi/CLionProjects/TicTacToe/gamesys.cpp
+
+/home/takacchi/CLionProjects/TicTacToe/minimax.cpp
+
