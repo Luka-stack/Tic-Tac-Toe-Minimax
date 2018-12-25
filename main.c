@@ -6,7 +6,6 @@
 #include <unistd.h>
 #include "minimax.cpp"
 #include "gamesys.cpp"
-#define B 9
 
 /*
  * minimax test
@@ -31,13 +30,15 @@ void minimax_test()
  */
 void display_board_test()
 {
-    char ai = 'A', hu = 'H';
+    char ai = 'A', hu = 'H', hu2 = 'O';
     int board[9] = {
             1, 2, 1,
             2, 1, 2,
             1, 0, 2
     };
-    display_board(board, hu, ai);
+    display_board(board, hu, ai, 1);
+    change_signs(&ai, &hu, &hu2);
+    display_board(board, hu, ai, 1);
 }
 
 /*
@@ -47,7 +48,7 @@ void display_board_test()
  */
 int main()
 {
-    int i = 1, isGameOn = -2, ans = -1;
+    int ans = -1;
     char ai = 'A', hu = 'H', hu2 = 'O';
     int board[B];
     set_empty_board(board);
@@ -58,31 +59,22 @@ int main()
         print_menu();
         printf("\t\tEnter Option Number: ");
         scanf("%d", &ans);
+        clean_stdin();
 
         switch (ans) {
             case 1:
-                //TODO print so nice statement at the beginning
-                while (isGameOn == -2) {
-                    printf("\n\n\t\t ---> %d Board Move <---", i++);
-                    display_board(board, hu, ai);
-                    execute_player_move(board);
-                    printf("\n\t\t --> %d board move <--", i++);
-                    display_board(board, hu, ai);
-                    sleep(1);
-                    board[find_best_move(board)] = 2;
-                    isGameOn = is_game_finished(board);
-                }
-
-                if (isGameOn == 1)
-                    printf("\n\t\t ==> Human Player Won - Congratulation");
-                else if (isGameOn == -1)
-                    printf("\n\t\t ==> AI Player Won - Computer seems to be smarter");
-                else
-                    printf("\n\t\t ==> It is a draw - That's normal don't worry :)");
-                display_board(board, hu, ai);
+                play_game(1, hu, ai);
                 break;
 
             case 2:
+                play_game(2, hu, hu2);
+                break;
+
+            case 3:
+                change_signs(&ai, &hu, &hu2);
+                break;
+
+            case 4:
                 print_author();
                 break;
 
