@@ -17,19 +17,19 @@ void clean_stdin(void) {
 /*
  * populate board with empty tiles
  */
-void set_empty_board(char *board)
+void set_empty_board(int *board)
 {
     int i;
 
     for (i = 0; i < 9; i++)
-        board[i] = '_';
+        board[i] = 0;
 }
 
 /*
  * take player move till it is valid,
  * execute or print error
  */
-void execute_player_move(char *board) {
+void execute_player_move(int *board) {
     int checkInput = 0, executeMove = -1;
 
     while (1)
@@ -38,8 +38,8 @@ void execute_player_move(char *board) {
         checkInput = scanf("%d", &executeMove);
         clean_stdin();
         if (checkInput != 0 && (executeMove >= 0 && executeMove <= 8)) {
-            if (board[executeMove] == '_') {
-                board[executeMove] = 'O';
+            if (board[executeMove] == 0) {
+                board[executeMove] = 1;
                 break;
             }
             else {
@@ -52,7 +52,10 @@ void execute_player_move(char *board) {
     }
 }
 
-void display_board(const char *board)
+/*
+ * replace every 1 and 0 for human's and ai's signs
+ */
+void display_board(const int *board, char hu, char ai)
 {
     int i;
 
@@ -63,14 +66,18 @@ void display_board(const char *board)
 
     for (i = 0; i < 7; i+=3)
     {
-        printf("\t\t#\t\t%c | %c | %c\t\t#\n", board[i], board[i+1], board[i+2]);
+        //printf("\t\t#\t\t%c | %c | %c\t\t#\n", board[i] == 1 ? hu : ai, board[i] == 1 ? hu : ai, board[i] == 1 ? hu : ai);
+        printf("\t\t#\t\t%c | ", board[i] == 1 ? hu : (board[i] == 2 ? ai : '_'));
+        printf("%c | ", board[i+1] == 1 ? hu : (board[i+1] == 2 ? ai : '_'));
+        printf("%c\t\t#\n", board[i+2] == 1 ? hu : (board[i+2] == 2 ? ai : '_'));
+
         if (i < 6) {
             printf("\t\t#\t\t---------\t\t#");
 
             if (i == 0)
-                printf("\t 'X' - Human Player");
+                printf("\t '%c' - Human Player", hu);
             else
-                printf("\t 'O' - Computer Player");
+                printf("\t '%c' - Computer Player", ai);
             printf("\n");
         }
     }
@@ -91,7 +98,7 @@ void print_menu(void)
         printf("#");
 
     printf("\n\t\t#\t\t\t\t\t\t\t\t\t#\n");
-    printf("\t\t#\t\t 1 - Play Game \t\t\t\t#");
+    printf("\t\t#\t\t 1 - Play Game vs Ai\t\t\t\t#");
     printf("\n\t\t#\t\t\t\t\t\t\t\t\t#\n");
     printf("\t\t#\t\t 2 - Print Author \t\t\t#");
     printf("\n\t\t#\t\t\t\t\t\t\t\t\t#\n");
@@ -115,7 +122,8 @@ void print_author(void)
  * check if someone won or if it is draw
  * human player - 1, ai player - -1, draw 0
  */
-int is_game_finished(const char *board)
+//TODO think about merging this function with evaluate
+int is_game_finished(const int *board)
 {
     int i;
 
@@ -124,9 +132,9 @@ int is_game_finished(const char *board)
     {
         if (board[i] == board[i+1] && board[i] == board[i+2])
         {
-            if (board[i] == 'X')
+            if (board[i] == 2)
                 return -1;
-            else if (board[i] == 'O')
+            else if (board[i] == 1)
                 return 1;
         }
     }
@@ -136,9 +144,9 @@ int is_game_finished(const char *board)
     {
         if (board[i] == board[i+3] && board[i] == board[i+6])
         {
-            if (board[i] == 'X')
+            if (board[i] == 2)
                 return -1;
-            else if (board[i] == 'O')
+            else if (board[i] == 1)
                 return 1;
         }
     }
@@ -146,21 +154,21 @@ int is_game_finished(const char *board)
     /* check diagonals */
     if (board[0] == board[4] && board[0] == board[8])
     {
-        if (board[0] == 'X')
+        if (board[0] == 2)
             return -1;
-        else if (board[0] == 'O')
+        else if (board[0] == 1)
             return 1;
     }
     if (board[3] == board[4] && board[3] == board[6])
     {
-        if (board[3] == 'X')
+        if (board[3] == 2)
             return -1;
-        else if (board[3] == 'O')
+        else if (board[3] == 1)
             return 1;
     }
 
     for (i = 0; i < 9; i++) {
-        if (board[i] == '_')
+        if (board[i] == 0)
             return -2;
     }
 

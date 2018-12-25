@@ -25,12 +25,12 @@ int min(int num1, int num2)
  * checking if there is any possible move
  * return true(1) if so, or false(0) otherwise
  */
-int any_left_moves(const char *board)
+int any_left_moves(const int *board)
 {
     int i;
 
     for (i = 0; i < 9; i++) {
-        if (board[i] == '_')
+        if (board[i] == 0)
             return 1;
     }
 
@@ -41,7 +41,7 @@ int any_left_moves(const char *board)
 * return value based on who is winning
 * return 10 if player 'X' wins, -10 if player 'O' wins, and 0 if draw
 */
-int evaluate(const char *board)
+int evaluate(const int *board)
 {
     int i;
 
@@ -50,9 +50,9 @@ int evaluate(const char *board)
     {
         if (board[i] == board[i+1] && board[i] == board[i+2])
         {
-            if (board[i] == 'X')
+            if (board[i] == 2)
                 return 10;
-            else if (board[i] == 'O')
+            else if (board[i] == 1)
                 return -10;
         }
     }
@@ -62,9 +62,9 @@ int evaluate(const char *board)
     {
         if (board[i] == board[i+3] && board[i] == board[i+6])
         {
-            if (board[i] == 'X')
+            if (board[i] == 2)
                 return 10;
-            else if (board[i] == 'O')
+            else if (board[i] == 1)
                 return -10;
         }
     }
@@ -72,16 +72,16 @@ int evaluate(const char *board)
     /* Checking diagonals for 'O' and 'X' player wins */
     if (board[0] == board[4] && board[4] == board[8])
     {
-        if (board[0] == 'X')
+        if (board[0] == 2)
             return 10;
-        else if (board[0] == 'O')
+        else if (board[0] == 1)
             return -10;
     }
     if (board[2] == board[4] && board[4] == board[6])
     {
-        if (board[2] == 'X')
+        if (board[2] == 2)
             return 10;
-        else if (board[2] == 'O')
+        else if (board[2] == 1)
             return -10;
     }
 
@@ -94,7 +94,7 @@ int evaluate(const char *board)
  * Consider all of the possible ways that game could take
  * and return the score
  */
-int minimax(char *board, int depth, int isMaxMove)
+int minimax(int *board, int depth, int isMaxMove)
 {
     int score, i;
 
@@ -127,16 +127,16 @@ int minimax(char *board, int depth, int isMaxMove)
         for (i = 0; i < 9; i++)
         {
             /* if tile is empty */
-            if (board[i] == '_')
+            if (board[i] == 0)
             {
                 /* make move */
-                board[i] = 'X';
+                board[i] = 2;
 
                 /* call minimax recursively to evaluate the best move (the highest value) */
                 best = max(best, minimax(board, depth+1, 0));
 
                 /* undo the move cuz there is only one board :> */
-                board[i] = '_';
+                board[i] = 0;
             }
         }
         return best;
@@ -151,16 +151,16 @@ int minimax(char *board, int depth, int isMaxMove)
         for (i = 0; i < 9; i++)
         {
             /* if tile is empty */
-            if (board[i] == '_')
+            if (board[i] == 0)
             {
                 /* make move */
-                board[i] = 'O';
+                board[i] = 1;
 
                 /* call minimax recursively to evaluate the best move (the lowest value) */
                 best = min(best, minimax(board, depth+1, 1));
 
                 /* undo move */
-                board[i] = '_';
+                board[i] = 0;
             }
         }
         return best;
@@ -170,7 +170,7 @@ int minimax(char *board, int depth, int isMaxMove)
 /*
  * return the best possible move
  */
-int find_best_move(char *board) {
+int find_best_move(int *board) {
     /* take relatively small number */
     int i, moveVal, bestVal = -1000, moveTile = -1;
 
@@ -178,15 +178,15 @@ int find_best_move(char *board) {
         and return tile with the best solution (value) */
     for (i = 0; i < 9; i++) {
         /* check if move is possible */
-        if (board[i] == '_') {
+        if (board[i] == 0) {
             /* make move */
-            board[i] = 'X';
+            board[i] = 2;
 
             /* evaluate minimax for this move */
             moveVal = minimax(board, 0, 0);
 
             /* undo the move */
-            board[i] = '_';
+            board[i] = 0;
 
             /*  if the moveVal is higher than current best
                 update the bestVal */
