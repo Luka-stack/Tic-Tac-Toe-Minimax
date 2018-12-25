@@ -14,10 +14,10 @@
 void minimax_test()
 {
     int value = 0;
-    char board[9] = {
-            'O', 'X', '_',
-            '_', 'O', '_',
-            '_', '_', '_'
+    int board[9] = {
+            1, 2, 1,
+            1, 0, 0,
+            0, 0, 2
     };
 
     value = find_best_move(board);
@@ -31,22 +31,25 @@ void minimax_test()
  */
 void display_board_test()
 {
-    char board[9] = {
-            'X', 'O', 'X',
-            'O', 'O', 'X',
-            '_', '_', '_'
+    char ai = 'A', hu = 'H';
+    int board[9] = {
+            1, 2, 1,
+            2, 1, 2,
+            1, 0, 2
     };
-    display_board(board);
+    display_board(board, hu, ai);
 }
 
 /*
- * for now human player is O
- * ai player is X
+ * human player is 1 (one)
+ * ai player is 2 (two)
+ * empty tile 0 (zero)
  */
 int main()
 {
     int i = 1, isGameOn = -2, ans = -1;
-    char board[B];
+    char ai = 'A', hu = 'H', hu2 = 'O';
+    int board[B];
     set_empty_board(board);
 
     printf("\n\t  () --=> Welcome to Ichi - Rei Game <=-- ()\n");
@@ -61,12 +64,12 @@ int main()
                 //TODO print so nice statement at the beginning
                 while (isGameOn == -2) {
                     printf("\n\n\t\t ---> %d Board Move <---", i++);
-                    display_board(board);
+                    display_board(board, hu, ai);
                     execute_player_move(board);
                     printf("\n\t\t --> %d board move <--", i++);
-                    display_board(board);
+                    display_board(board, hu, ai);
                     sleep(1);
-                    board[find_best_move(board)] = 'X';
+                    board[find_best_move(board)] = 2;
                     isGameOn = is_game_finished(board);
                 }
 
@@ -76,7 +79,7 @@ int main()
                     printf("\n\t\t ==> AI Player Won - Computer seems to be smarter");
                 else
                     printf("\n\t\t ==> It is a draw - That's normal don't worry :)");
-                display_board(board);
+                display_board(board, hu, ai);
                 break;
 
             case 2:
