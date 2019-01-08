@@ -33,7 +33,7 @@ void set_empty_board(int *board)
  * player = 1 -> human, player = 2 -> human 2
  * moveTurn 1 - human move 2 - ai move
  */
-void execute_player_move(int *board, int player, int moveTurn) {
+int execute_player_move(int *board, int player, int moveTurn) {
     int checkInput = 0, executeMove = -1;
 
     if (moveTurn == 2)
@@ -43,7 +43,7 @@ void execute_player_move(int *board, int player, int moveTurn) {
     }
     else {
         while (1) {
-            printf("\nPlease enter number <0, 9> indicating where you want put your sign: ");
+            printf("\nPlease enter number 10 to exit or <0, 9> indicating where you want put your sign: ");
             checkInput = scanf("%d", &executeMove);
             clean_stdin();
             if (checkInput != 0 && (executeMove >= 0 && executeMove <= 8)) {
@@ -53,11 +53,15 @@ void execute_player_move(int *board, int player, int moveTurn) {
                 } else {
                     printf("[%d] is occupied\n", executeMove);
                 }
+            } else if (executeMove == 10) {
+                return 10;
             } else {
                 printf("Invalid Input. Enter Number in range <0, 8>\n");
             }
         }
     }
+
+    return 0;
 }
 
 /*
@@ -248,7 +252,9 @@ void play_game(int setting, char p1, char p2)
     {
         printf("\n\n\t\t ---> %d Board Move <---", i++);
         display_board(board, p1, p2, setting);
-        execute_player_move(board, whichPlayer, whichTurn);
+        isGameOn = execute_player_move(board, whichPlayer, whichTurn);
+        if (isGameOn == 10)
+            break;
         if (setting == 2)
             whichPlayer = (whichPlayer == 1 ? 2 : 1);
         else
@@ -256,13 +262,17 @@ void play_game(int setting, char p1, char p2)
         isGameOn = is_game_finished(board);
     }
 
-    if (isGameOn == 1)
-        printf("\n\t\t ==> Human Player Won - Congratulation");
-    else if (isGameOn == -1)
-        printf("\n\t\t ==> %s Player Won - %s seems to be smarter", setting == 2 ? "Human 2" : "Computer",
-               setting == 2 ? "Human 2" : "Computer");
-    else
-        printf("\n\t\t ==> It is a draw - That's normal don't worry :)");
-    display_board(board, p1, p2, setting);
-    printf("\n\t\t\t\t +\t+\t+ GAME FINISHED +\t+\t+ \n\n");
+    if (isGameOn == 10) {
+        printf("\n\t\t\t\t +\t+\t+ Game has been stopped +\t+\t+ \n\n");
+    } else {
+        if (isGameOn == 1)
+            printf("\n\t\t ==> Human Player Won - Congratulation");
+        else if (isGameOn == -1)
+            printf("\n\t\t ==> %s Player Won - %s seems to be smarter", setting == 2 ? "Human 2" : "Computer",
+                   setting == 2 ? "Human 2" : "Computer");
+        else
+            printf("\n\t\t ==> It is a draw - That's normal don't worry :)");
+        display_board(board, p1, p2, setting);
+        printf("\n\t\t\t\t +\t+\t+ GAME FINISHED +\t+\t+ \n\n");
+    }
 }
