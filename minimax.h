@@ -44,4 +44,4 @@ int minimax(int *board, int depth, int isMaxMove);
  */
 int find_best_move(int *board);
 
-#endif TICTACTOE_MINIMAX_H
+#endif //TICTACTOE_MINIMAX_H

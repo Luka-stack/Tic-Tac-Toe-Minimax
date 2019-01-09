@@ -6,17 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/takacchi/CLionProjects/TicTacToe/gamesys.cpp
-
-/home/takacchi/CLionProjects/TicTacToe/main.c
+/home/takacchi/CLionProjects/TicTacToe/gamesys.c
 stdio.h
 -
 unistd.h
 -
-minimax.cpp
-/home/takacchi/CLionProjects/TicTacToe/minimax.cpp
-gamesys.cpp
-/home/takacchi/CLionProjects/TicTacToe/gamesys.cpp
+gamesys.h
+/home/takacchi/CLionProjects/TicTacToe/gamesys.h
+minimax.h
+/home/takacchi/CLionProjects/TicTacToe/minimax.h
 
-/home/takacchi/CLionProjects/TicTacToe/minimax.cpp
+/home/takacchi/CLionProjects/TicTacToe/gamesys.h
+
+/home/takacchi/CLionProjects/TicTacToe/minimax.h
 

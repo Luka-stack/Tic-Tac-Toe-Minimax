@@ -64,17 +64,17 @@ void display_board(const int *board, char p1, char p2, int setting)
     printf("\n\n\t\t");
     for (i = 0; i < 25; i++)
         printf("#");
-    printf("\n\t\t#\t\t\t#\n");
+    printf("\n\t\t#\t\t\t\t\t\t#\n");
 
     for (i = 0; i < 7; i+=3)
     {
         /*printf("\t\t#\t\t%c | %c | %c\t\t#\n", board[i] == 1 ? hu : ai, board[i] == 1 ? hu : ai, board[i] == 1 ? hu : ai);*/
-        printf("\t\t#\t%c | ", board[i] == 1 ? p1 : (board[i] == 2 ? p2 : z+'0')); z++;
+        printf("\t\t#\t\t%c | ", board[i] == 1 ? p1 : (board[i] == 2 ? p2 : z+'0')); z++;
         printf("%c | ", board[i+1] == 1 ? p1 : (board[i+1] == 2 ? p2 : z+'0')); z++;
-        printf("%c\t#\n", board[i+2] == 1 ? p1 : (board[i+2] == 2 ? p2 : z+'0')); z++;
+        printf("%c\t\t#\n", board[i+2] == 1 ? p1 : (board[i+2] == 2 ? p2 : z+'0')); z++;
 
         if (i < 6) {
-            printf("\t\t#\t---------\t#");
+            printf("\t\t#\t\t---------\t\t#");
 
             if (i == 0)
                 printf("\t '%c' - Human Player", p1);
@@ -84,7 +84,7 @@ void display_board(const int *board, char p1, char p2, int setting)
         }
     }
 
-    printf("\t\t#\t\t\t#\n");
+    printf("\t\t#\t\t\t\t\t\t#\n");
     printf("\t\t");
     for (i = 0; i < 25; i++)
         printf("#");
@@ -96,23 +96,23 @@ void print_menu(void)
     int i;
 
     printf("\n\t\t");
-    for (i = 0; i < 41; i++)
+    for (i = 0; i < 33; i++)
         printf("#");
 
-    printf("\n\t\t#\t\t\t\t\t#\n");
+    printf("\n\t\t#\t\t\t\t\t\t\t\t#\n");
     printf("\t\t#\t 1 - Play Game vs Ai \t\t#");
-    printf("\n\t\t#\t\t\t\t\t#\n");
+    printf("\n\t\t#\t\t\t\t\t\t\t\t#\n");
     printf("\t\t#\t 2 - Play Game vs Human \t#");
-    printf("\n\t\t#\t\t\t\t\t#\n");
-    printf("\t\t#\t 3 - Change Signs \t\t#");
-    printf("\n\t\t#\t\t\t\t\t#\n");
-    printf("\t\t#\t 4 - Print Author \t\t#");
-    printf("\n\t\t#\t\t\t\t\t#\n");
-    printf("\t\t#\t 0 - Exit \t\t\t#");
-    printf("\n\t\t#\t\t\t\t\t#\n");
+    printf("\n\t\t#\t\t\t\t\t\t\t\t#\n");
+    printf("\t\t#\t 3 - Change Signs \t\t\t#");
+    printf("\n\t\t#\t\t\t\t\t\t\t\t#\n");
+    printf("\t\t#\t 4 - Print Author \t\t\t#");
+    printf("\n\t\t#\t\t\t\t\t\t\t\t#\n");
+    printf("\t\t#\t 0 - Exit \t\t\t\t\t#");
+    printf("\n\t\t#\t\t\t\t\t\t\t\t#\n");
 
     printf("\t\t");
-    for (i = 0; i < 41; i++)
+    for (i = 0; i < 33; i++)
         printf("#");
     printf("\n\n");
 }
@@ -238,7 +238,6 @@ void play_game(int setting, char p1, char p2)
         isGameOn = is_game_finished(board);
     }
 
-<<<<<<< HEAD:gamesys.c
     if (isGameOn == 10) {
         printf("\n\t\t\t\t +\t+\t+ GAME HAS BEEN STOPPED +\t+\t+ \n\n");
     } else {
@@ -252,7 +251,7 @@ void play_game(int setting, char p1, char p2)
         display_board(board, p1, p2, setting);
         printf("\n\t\t\t\t +\t+\t+ GAME FINISHED +\t+\t+ \n\n");
     }
-=======
+
     if (isGameOn == 1)
         printf("\n\t\t ==> Human Player Won - Congratulation");
     else if (isGameOn == -1)
@@ -262,5 +261,4 @@ void play_game(int setting, char p1, char p2)
         printf("\n\t\t ==> It is a draw - That's normal don't worry :)");
     display_board(board, p1, p2, setting);
     printf("\n\t\t\t\t +\t+\t+ GAME FINISHED +\t+\t+ \n\n");
->>>>>>> 24611f63cf58dcf9bffc99bf6121e97e7130da3b:gamesys.c
 }

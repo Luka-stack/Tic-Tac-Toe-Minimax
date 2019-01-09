@@ -25,7 +25,7 @@ void set_empty_board(int *board);
  * player = 1 -> human, player = 2 -> human 2
  * moveTurn 1 - human move 2 - ai move
  */
-void execute_player_move(int *board, int player, int moveTurn);
+int execute_player_move(int *board, int player, int moveTurn);
 
 /*
  * replace 1 for human player -> p1
@@ -56,4 +56,4 @@ void change_signs(char *ai, char *hu, char *hu2);
  */
 void play_game(int setting, char p1, char p2);
 
-#endif TICTACTOE_GAMESYS_H
+#endif //TICTACTOE_GAMESYS_H
