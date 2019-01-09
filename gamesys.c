@@ -238,6 +238,7 @@ void play_game(int setting, char p1, char p2)
         isGameOn = is_game_finished(board);
     }
 
+<<<<<<< HEAD:gamesys.c
     if (isGameOn == 10) {
         printf("\n\t\t\t\t +\t+\t+ GAME HAS BEEN STOPPED +\t+\t+ \n\n");
     } else {
@@ -251,4 +252,15 @@ void play_game(int setting, char p1, char p2)
         display_board(board, p1, p2, setting);
         printf("\n\t\t\t\t +\t+\t+ GAME FINISHED +\t+\t+ \n\n");
     }
+=======
+    if (isGameOn == 1)
+        printf("\n\t\t ==> Human Player Won - Congratulation");
+    else if (isGameOn == -1)
+        printf("\n\t\t ==> %s Player Won - %s seems to be smarter", setting == 2 ? "Human 2" : "Computer",
+               setting == 2 ? "Human 2" : "Computer");
+    else
+        printf("\n\t\t ==> It is a draw - That's normal don't worry :)");
+    display_board(board, p1, p2, setting);
+    printf("\n\t\t\t\t +\t+\t+ GAME FINISHED +\t+\t+ \n\n");
+>>>>>>> 24611f63cf58dcf9bffc99bf6121e97e7130da3b:gamesys.c
 }
