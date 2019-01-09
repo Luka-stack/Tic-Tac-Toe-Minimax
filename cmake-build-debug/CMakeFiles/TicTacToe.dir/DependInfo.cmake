@@ -4,7 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/takacchi/CLionProjects/TicTacToe/gamesys.c" "/home/takacchi/CLionProjects/TicTacToe/cmake-build-debug/CMakeFiles/TicTacToe.dir/gamesys.c.o"
   "/home/takacchi/CLionProjects/TicTacToe/main.c" "/home/takacchi/CLionProjects/TicTacToe/cmake-build-debug/CMakeFiles/TicTacToe.dir/main.c.o"
+  "/home/takacchi/CLionProjects/TicTacToe/minimax.c" "/home/takacchi/CLionProjects/TicTacToe/cmake-build-debug/CMakeFiles/TicTacToe.dir/minimax.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

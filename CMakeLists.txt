@@ -3,4 +3,4 @@ project(TicTacToe C)
 
 set(CMAKE_C_STANDARD 90)
 
-add_executable(TicTacToe main.c minimax.cpp gamesys.cpp)
+add_executable(TicTacToe main.c minimax.c gamesys.c minimax.h gamesys.h)

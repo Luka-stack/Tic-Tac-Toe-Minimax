@@ -78,13 +78,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/takacchi/CLionProjects/TicTacToe/gamesys.cpp">
+		<Unit filename="/home/takacchi/CLionProjects/TicTacToe/gamesys.c">
+			<Option target="TicTacToe"/>
+		</Unit>
+		<Unit filename="/home/takacchi/CLionProjects/TicTacToe/gamesys.h">
 			<Option target="TicTacToe"/>
 		</Unit>
 		<Unit filename="/home/takacchi/CLionProjects/TicTacToe/main.c">
 			<Option target="TicTacToe"/>
 		</Unit>
-		<Unit filename="/home/takacchi/CLionProjects/TicTacToe/minimax.cpp">
+		<Unit filename="/home/takacchi/CLionProjects/TicTacToe/minimax.c">
+			<Option target="TicTacToe"/>
+		</Unit>
+		<Unit filename="/home/takacchi/CLionProjects/TicTacToe/minimax.h">
 			<Option target="TicTacToe"/>
 		</Unit>
 		<Unit filename="/home/takacchi/CLionProjects/TicTacToe/CMakeLists.txt">

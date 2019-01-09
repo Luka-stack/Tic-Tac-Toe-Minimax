@@ -1,12 +1,14 @@
 /*
  * Created By Hayami Takahiro
- * C Source file which contains all function for AI Player
+ * C Source file which contains game engine with GUI
  */
+
+#include <stdio.h>
+#include <unistd.h>
+#include "gamesys.h"
+#include "minimax.h"
 #define B 9
 
-/*
- * helper function to clear stdin
- */
 void clean_stdin(void)
 {
     int c;
@@ -16,9 +18,6 @@ void clean_stdin(void)
     } while (c != '\n' && c != EOF);
 }
 
-/*
- * populate board with empty tiles
- */
 void set_empty_board(int *board)
 {
     int i;
@@ -27,12 +26,6 @@ void set_empty_board(int *board)
         board[i] = 0;
 }
 
-/*
- * take player move till it is valid,
- * execute or print error
- * player = 1 -> human, player = 2 -> human 2
- * moveTurn 1 - human move 2 - ai move
- */
 int execute_player_move(int *board, int player, int moveTurn) {
     int checkInput = 0, executeMove = -1;
 
@@ -43,7 +36,7 @@ int execute_player_move(int *board, int player, int moveTurn) {
     }
     else {
         while (1) {
-            printf("\nPlease enter number 10 to exit or <0, 9> indicating where you want put your sign: ");
+            printf("\nPlease enter number 10 to exit or <0, 8> indicating where you want put your sign: ");
             checkInput = scanf("%d", &executeMove);
             clean_stdin();
             if (checkInput != 0 && (executeMove >= 0 && executeMove <= 8)) {
@@ -64,29 +57,24 @@ int execute_player_move(int *board, int player, int moveTurn) {
     return 0;
 }
 
-/*
- * replace 1 for human player -> p1
- * 2 for human 2 player or ai player -> p2
- * setting says if its human vs ai or human vs human
- */
 void display_board(const int *board, char p1, char p2, int setting)
 {
-    int i;
+    int i, z = 0;
 
     printf("\n\n\t\t");
     for (i = 0; i < 25; i++)
         printf("#");
-    printf("\n\t\t#\t\t\t\t\t\t#\n");
+    printf("\n\t\t#\t\t\t#\n");
 
     for (i = 0; i < 7; i+=3)
     {
-        //printf("\t\t#\t\t%c | %c | %c\t\t#\n", board[i] == 1 ? hu : ai, board[i] == 1 ? hu : ai, board[i] == 1 ? hu : ai);
-        printf("\t\t#\t\t%c | ", board[i] == 1 ? p1 : (board[i] == 2 ? p2 : '_'));
-        printf("%c | ", board[i+1] == 1 ? p1 : (board[i+1] == 2 ? p2 : '_'));
-        printf("%c\t\t#\n", board[i+2] == 1 ? p1 : (board[i+2] == 2 ? p2 : '_'));
+        /*printf("\t\t#\t\t%c | %c | %c\t\t#\n", board[i] == 1 ? hu : ai, board[i] == 1 ? hu : ai, board[i] == 1 ? hu : ai);*/
+        printf("\t\t#\t%c | ", board[i] == 1 ? p1 : (board[i] == 2 ? p2 : z+'0')); z++;
+        printf("%c | ", board[i+1] == 1 ? p1 : (board[i+1] == 2 ? p2 : z+'0')); z++;
+        printf("%c\t#\n", board[i+2] == 1 ? p1 : (board[i+2] == 2 ? p2 : z+'0')); z++;
 
         if (i < 6) {
-            printf("\t\t#\t\t---------\t\t#");
+            printf("\t\t#\t---------\t#");
 
             if (i == 0)
                 printf("\t '%c' - Human Player", p1);
@@ -96,7 +84,7 @@ void display_board(const int *board, char p1, char p2, int setting)
         }
     }
 
-    printf("\t\t#\t\t\t\t\t\t#\n");
+    printf("\t\t#\t\t\t#\n");
     printf("\t\t");
     for (i = 0; i < 25; i++)
         printf("#");
@@ -108,23 +96,23 @@ void print_menu(void)
     int i;
 
     printf("\n\t\t");
-    for (i = 0; i < 37; i++)
+    for (i = 0; i < 41; i++)
         printf("#");
 
-    printf("\n\t\t#\t\t\t\t\t\t\t\t\t#\n");
-    printf("\t\t#\t\t 1 - Play Game vs Ai\t\t#");
-    printf("\n\t\t#\t\t\t\t\t\t\t\t\t#\n");
-    printf("\t\t#\t\t 2 - Play Game vs Human\t\t#");
-    printf("\n\t\t#\t\t\t\t\t\t\t\t\t#\n");
-    printf("\t\t#\t\t 3 - Change Signs\t\t\t#");
-    printf("\n\t\t#\t\t\t\t\t\t\t\t\t#\n");
-    printf("\t\t#\t\t 4 - Print Author \t\t\t#");
-    printf("\n\t\t#\t\t\t\t\t\t\t\t\t#\n");
-    printf("\t\t#\t\t 0 - Exit \t\t\t\t\t#");
-    printf("\n\t\t#\t\t\t\t\t\t\t\t\t#\n");
+    printf("\n\t\t#\t\t\t\t\t#\n");
+    printf("\t\t#\t 1 - Play Game vs Ai \t\t#");
+    printf("\n\t\t#\t\t\t\t\t#\n");
+    printf("\t\t#\t 2 - Play Game vs Human \t#");
+    printf("\n\t\t#\t\t\t\t\t#\n");
+    printf("\t\t#\t 3 - Change Signs \t\t#");
+    printf("\n\t\t#\t\t\t\t\t#\n");
+    printf("\t\t#\t 4 - Print Author \t\t#");
+    printf("\n\t\t#\t\t\t\t\t#\n");
+    printf("\t\t#\t 0 - Exit \t\t\t#");
+    printf("\n\t\t#\t\t\t\t\t#\n");
 
     printf("\t\t");
-    for (i = 0; i < 37; i++)
+    for (i = 0; i < 41; i++)
         printf("#");
     printf("\n\n");
 }
@@ -133,14 +121,10 @@ void print_author(void)
 {
     printf("\n\t\t Project: Ichi - Rei Game\n");
     printf("\n\t\t Created By: Hayami Takahiro On: 25.12.2018\n");
-    printf("\n\t\t Description: Tic-Tac_Toe Based on MiniMax Algorithm\n");
+    printf("\n\t\t Description: Tic-Tac-Toe Based on MiniMax Algorithm\n");
 }
 
-/*
- * check if someone won or if it is draw
- * human player - 1, ai/human2 player - -1, draw 0
- */
-//TODO think about merging this function with evaluate
+/* TODO think about merging this function with evaluate */
 int is_game_finished(const int *board)
 {
     int i;
@@ -193,18 +177,15 @@ int is_game_finished(const int *board)
     return 0;
 }
 
-/*
- * change sign for every player
- */
 void change_signs(char *ai, char *hu, char *hu2) {
     int ans, outLoop = 1;
 
     printf("\n\t\t--=> Signs Settings <=--\n");
     while (outLoop) {
         printf("\t\tCurrent Signs: \n");
-        printf("\t\tComputer: [%c], \tHuman: [%c], \tHuman 2: [%c]", *ai, *hu, *hu2);
+        printf("\t\t\tComputer: [%c], \tHuman: [%c], Human 2: [%c]\n", *ai, *hu, *hu2);
         printf("\n\t\tWhich one would you like to change?\n");
-        printf("\t\t1. Computer \t2. Human\n\t\t3. Human 2 \t\t0. Back To Main menu\n\t\t>>");
+        printf("\t\t1. Computer \t2. Human\n\t\t3. Human 2 \t0. Back To Main menu\n\t\t>> ");
         scanf("%d", &ans);
         clean_stdin();
 
@@ -237,11 +218,6 @@ void change_signs(char *ai, char *hu, char *hu2) {
     }
 }
 
-/*
- * play tic tac toe game depends on settings
- * p1 -> human player p2 -> ai or human2
- * setting 1 - hu vs ai 2 - hu vs hu
- */
 void play_game(int setting, char p1, char p2)
 {
     int i = 1, isGameOn = -2, board[B];
@@ -263,7 +239,7 @@ void play_game(int setting, char p1, char p2)
     }
 
     if (isGameOn == 10) {
-        printf("\n\t\t\t\t +\t+\t+ Game has been stopped +\t+\t+ \n\n");
+        printf("\n\t\t\t\t +\t+\t+ GAME HAS BEEN STOPPED +\t+\t+ \n\n");
     } else {
         if (isGameOn == 1)
             printf("\n\t\t ==> Human Player Won - Congratulation");

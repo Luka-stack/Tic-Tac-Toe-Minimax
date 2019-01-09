@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/TicTacToe.dir/main.c.o"
+  "CMakeFiles/TicTacToe.dir/minimax.c.o"
+  "CMakeFiles/TicTacToe.dir/gamesys.c.o"
   "TicTacToe.pdb"
   "TicTacToe"
 )

@@ -123,6 +123,33 @@ TicTacToe/fast:
 	$(MAKE) -f CMakeFiles/TicTacToe.dir/build.make CMakeFiles/TicTacToe.dir/build
 .PHONY : TicTacToe/fast
 
+gamesys.o: gamesys.c.o
+
+.PHONY : gamesys.o
+
+# target to build an object file
+gamesys.c.o:
+	$(MAKE) -f CMakeFiles/TicTacToe.dir/build.make CMakeFiles/TicTacToe.dir/gamesys.c.o
+.PHONY : gamesys.c.o
+
+gamesys.i: gamesys.c.i
+
+.PHONY : gamesys.i
+
+# target to preprocess a source file
+gamesys.c.i:
+	$(MAKE) -f CMakeFiles/TicTacToe.dir/build.make CMakeFiles/TicTacToe.dir/gamesys.c.i
+.PHONY : gamesys.c.i
+
+gamesys.s: gamesys.c.s
+
+.PHONY : gamesys.s
+
+# target to generate assembly for a file
+gamesys.c.s:
+	$(MAKE) -f CMakeFiles/TicTacToe.dir/build.make CMakeFiles/TicTacToe.dir/gamesys.c.s
+.PHONY : gamesys.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -150,6 +177,33 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/TicTacToe.dir/build.make CMakeFiles/TicTacToe.dir/main.c.s
 .PHONY : main.c.s
 
+minimax.o: minimax.c.o
+
+.PHONY : minimax.o
+
+# target to build an object file
+minimax.c.o:
+	$(MAKE) -f CMakeFiles/TicTacToe.dir/build.make CMakeFiles/TicTacToe.dir/minimax.c.o
+.PHONY : minimax.c.o
+
+minimax.i: minimax.c.i
+
+.PHONY : minimax.i
+
+# target to preprocess a source file
+minimax.c.i:
+	$(MAKE) -f CMakeFiles/TicTacToe.dir/build.make CMakeFiles/TicTacToe.dir/minimax.c.i
+.PHONY : minimax.c.i
+
+minimax.s: minimax.c.s
+
+.PHONY : minimax.s
+
+# target to generate assembly for a file
+minimax.c.s:
+	$(MAKE) -f CMakeFiles/TicTacToe.dir/build.make CMakeFiles/TicTacToe.dir/minimax.c.s
+.PHONY : minimax.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -159,9 +213,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... TicTacToe"
 	@echo "... edit_cache"
+	@echo "... gamesys.o"
+	@echo "... gamesys.i"
+	@echo "... gamesys.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... minimax.o"
+	@echo "... minimax.i"
+	@echo "... minimax.s"
 .PHONY : help
 
 

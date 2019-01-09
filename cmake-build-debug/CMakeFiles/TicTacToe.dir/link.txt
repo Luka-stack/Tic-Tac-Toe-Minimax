@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/TicTacToe.dir/main.c.o  -o TicTacToe 
+/usr/bin/cc -g   CMakeFiles/TicTacToe.dir/main.c.o CMakeFiles/TicTacToe.dir/minimax.c.o CMakeFiles/TicTacToe.dir/gamesys.c.o  -o TicTacToe 

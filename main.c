@@ -3,43 +3,9 @@
  */
 
 #include <stdio.h>
-#include <unistd.h>
-#include "minimax.cpp"
-#include "gamesys.cpp"
-
-/*
- * minimax test
- */
-void minimax_test()
-{
-    int value = 0;
-    int board[9] = {
-            1, 2, 1,
-            1, 0, 0,
-            0, 0, 2
-    };
-
-    value = find_best_move(board);
-
-    printf("The Optimal move is: \n");
-    printf("Tile: %d\n", value);
-}
-
-/*
- * display board test
- */
-void display_board_test()
-{
-    char ai = 'A', hu = 'H', hu2 = 'O';
-    int board[9] = {
-            1, 2, 1,
-            2, 1, 2,
-            1, 0, 2
-    };
-    display_board(board, hu, ai, 1);
-    change_signs(&ai, &hu, &hu2);
-    display_board(board, hu, ai, 1);
-}
+#include "minimax.h"
+#include "gamesys.h"
+#define B 9
 
 /*
  * human player is 1 (one)

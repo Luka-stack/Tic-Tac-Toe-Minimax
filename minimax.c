@@ -2,29 +2,18 @@
  * Created By Hayami Takahiro
  * C Source file which contains all function for AI Player
  */
+#include "minimax.h"
 
-//TODO Think about changing char board to int board (huPlayer - 1, aiPlayer - -1, empty - 0)
-
-/*
- * return max from given parameters
- */
 int max(int num1, int num2)
 {
     return (num1 > num2 ? num1 : num2);
 }
 
-/*
- * return min from given parameters
- */
 int min(int num1, int num2)
 {
     return (num1 < num2 ? num1 : num2);
 }
 
-/*
- * checking if there is any possible move
- * return true(1) if so, or false(0) otherwise
- */
 int any_left_moves(const int *board)
 {
     int i;
@@ -37,10 +26,6 @@ int any_left_moves(const int *board)
     return 0;
 }
 
-/*
-* return value based on who is winning
-* return 10 if player 'X' wins, -10 if player 'O' wins, and 0 if draw
-*/
 int evaluate(const int *board)
 {
     int i;
@@ -89,11 +74,6 @@ int evaluate(const int *board)
     return 0;
 }
 
-/*
- * Implementation of minimax algorithm.
- * Consider all of the possible ways that game could take
- * and return the score
- */
 int minimax(int *board, int depth, int isMaxMove)
 {
     int score, i;
@@ -167,9 +147,6 @@ int minimax(int *board, int depth, int isMaxMove)
     }
 }
 
-/*
- * return the best possible move
- */
 int find_best_move(int *board) {
     /* take relatively small number */
     int i, moveVal, bestVal = -1000, moveTile = -1;
